@@ -23,16 +23,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Create k8s Kind Cluster
-      uses: helm/kind-action@v1.1.0
-    - uses: yokawasa/action-setup-kube-tools@v0.7.1
-      with:
-        kubectl: '1.21.2'
-        tilt: '0.20.8'
     - uses: actions/setup-go@v2
       with:
         go-version: '^1.16.0'
-    - run: kubectl version
-    - run: tilt version
-    - run: curl http://localhost:9000
     - run: curl http://minio:9000
