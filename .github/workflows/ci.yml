@@ -28,6 +28,10 @@ jobs:
     - uses: actions/checkout@v2
     - run: go version
     - run: apk --update add curl
+    - run: echo http://${MINIO_HOST}:${MINIO_PORT}
+      env:
+        MINIO_HOST: minio
+        MINIO_PORT: ${{ job.services.minio.ports[9000] }}
     - run: curl http://${MINIO_HOST}:${MINIO_PORT}
       env:
         MINIO_HOST: minio
