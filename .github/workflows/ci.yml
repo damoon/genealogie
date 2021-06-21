@@ -34,7 +34,5 @@ jobs:
         go-version: '^1.16.0'
     - run: kubectl version
     - run: tilt version
-    - run: env
-      env:
-        MINIO_HOST: localhost
-        MINIO_PORT: ${{ job.services.minio.ports[9000] }}
+    - run: curl http://localhost:9000
+    - run: curl http://minio:9000
