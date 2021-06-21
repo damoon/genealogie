@@ -31,4 +31,4 @@ jobs:
 #        go-version: '^1.16.0'
     - run: go version
     - run: apk --update add curl
-    - run: curl http://minio:9000
+    - run: curl http://localhost:9000
