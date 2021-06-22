@@ -2,11 +2,12 @@ on:
   - push
   - pull_request
 
+env:
+  GOLANGCI_VERSION: v1.41.0
+
 jobs:
   lint:
     runs-on: ubuntu-latest
-    env:
-      GOLANGCI_VERSION: v1.41.0
     steps:
       - uses: actions/checkout@v2
       - name: golangci-lint
