@@ -22,20 +22,10 @@ jobs:
     steps:
       - name: Setup minio
         run: |
-          docker run -d -p 9000:9000 --name minio \
-                     -e "MINIO_ACCESS_KEY=minio123" \
-                     -e "MINIO_SECRET_KEY=minio456" \
-                     minio/minio server /data
-          export AWS_ACCESS_KEY_ID=minio123
-          export AWS_SECRET_ACCESS_KEY=minio456
-          export AWS_EC2_METADATA_DISABLED=true
-          aws --endpoint-url http://127.0.0.1:9000/ s3 mb s3://testbucket
+          docker-compose up -d
+          until curl --fail http://127.0.0.1:9000; do sleep 1; done
       - uses: actions/checkout@v2
       - uses: actions/setup-go@v2
         with:
           go-version: ${{ env.GOLANG_VERSION }}
-      - run: go version
-      - run: curl http://${MINIO_HOST}:${MINIO_PORT}
-        env:
-          MINIO_HOST: localhost
-          MINIO_PORT: 9000
+      - run: go test ./...
