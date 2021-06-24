@@ -24,7 +24,7 @@ jobs:
       - name: Setup minio
         run: |
           docker-compose up -d
-          until curl --fail http://127.0.0.1:9000; do sleep 1; done
+          until curl http://127.0.0.1:9000; do sleep 1; done
       - uses: actions/setup-go@v2
         with:
           go-version: ${{ env.GOLANG_VERSION }}
