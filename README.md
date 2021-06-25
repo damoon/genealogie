@@ -2,15 +2,35 @@
 
 Create a backup of a bucket and restore at a later time.
 
-This is designed to backup a bucket to another bucket.  
-The reasoning is:
-  - object versioning does not protect against bucket deletion
-  - buckets provided via rook/ceph running in kubernetes are a complex system, software bugs can lead to data loss
+## Purpose
+
+Running Rook to operate ceph still needs backups to protect against data loss.  
+- ceph can fail
+- rook can fail
+- kubernetes nodes can become inaccessible
+
+## Features
+
+- none
+
+## Wishlist
+
+- create backup
+- list backups
+- list files in backup
+- list backups of file
+- restore bucket
+- restore file
+- skip unchanged files
+- trim backups
+- add parity data
+- scrub
+- compression
+- deduplication
+- encryption
+- helm chart
 
 ## Contribute
 
-The project uses `golang`.
-
-For CI `github actions` are used.  
-
-For local development `tilt` sets up and live reloads an environment.
+1. start minio via `docker-compose up`
+2. verify tests via `go test ./...`

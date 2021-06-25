@@ -21,11 +21,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Setup minio
-        run: |
-          docker-compose up -d
-          until curl http://127.0.0.1:9000; do sleep 1; done
       - uses: actions/setup-go@v2
         with:
           go-version: ${{ env.GOLANG_VERSION }}
-      - run: go test ./...
+      - name: Setup minio
+        run: make up
+      - run: make test
