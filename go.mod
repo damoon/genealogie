@@ -1,4 +1,4 @@
-module github.com/damoon/backup-bucket-to-bucket
+module github.com/damoon/bucket-backup
 
 go 1.16
 
