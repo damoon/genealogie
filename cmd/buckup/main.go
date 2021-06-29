@@ -85,8 +85,6 @@ func doctor(c *cli.Context) error {
 		StorageClass:              nil,
 		Tagging:                   nil,
 		WebsiteRedirectLocation:   nil,
-
-		// StorageClass: ,
 	}
 	_ = obj
 	uploader.UploadWithContext(ctx, obj)
