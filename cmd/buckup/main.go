@@ -122,6 +122,16 @@ func doctor(c *cli.Context) error {
 			for _, obj := range page.Versions {
 				fmt.Printf("%v\n", *obj)
 
+				_, err := client.GetObjectWithContext(ctx, &s3.GetObjectInput{
+					Bucket:    bucket.Name,
+					Key:       obj.Key,
+					VersionId: obj.VersionId,
+				})
+				if err != nil {
+					log.Println(err)
+					return false
+				}
+
 				head, err := client.HeadObjectWithContext(ctx, &s3.HeadObjectInput{
 					Bucket: bucket.Name,
 					Key:    obj.Key,

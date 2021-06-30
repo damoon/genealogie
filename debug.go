@@ -5,50 +5,49 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 )
 
 func init() {
 	obj := &GetObjectOutput{}
 	version := &ObjectVersion{}
-	head := &HeadObjectOutput{}
-	tagging := &s3.GetBucketTaggingOutput{}
+	//head := &HeadObjectOutput{}
+	//tagging := &s3.GetBucketTaggingOutput{}
 
-	_, _, _, _ = obj, version, head, tagging
+	//_, _, _, _ = obj, version, head, tagging
 
 	upload := &s3manager.UploadInput{
-		ACL:                       nil,
 		Body:                      obj.Body,
 		Bucket:                    nil, // static
-		BucketKeyEnabled:          obj.BucketKeyEnabled,
-		CacheControl:              head.CacheControl,
-		ContentDisposition:        head.ContentDisposition,
-		ContentEncoding:           head.ContentEncoding,
-		ContentLanguage:           head.ContentLanguage,
+		CacheControl:              obj.CacheControl,
+		ContentDisposition:        obj.ContentDisposition,
+		ContentEncoding:           obj.ContentEncoding,
+		ContentLanguage:           obj.ContentLanguage,
 		ContentMD5:                nil, // calculate
-		ContentType:               head.ContentType,
-		ExpectedBucketOwner:       version.Owner.ID,
+		ContentType:               obj.ContentType,
 		Expires:                   nil, // head.Expires
-		GrantFullControl:          nil,
-		GrantRead:                 nil,
-		GrantReadACP:              nil,
-		GrantWriteACP:             nil,
 		Key:                       version.Key,
 		Metadata:                  map[string]*string{"a": aws.String("b")},
 		ObjectLockLegalHoldStatus: obj.ObjectLockLegalHoldStatus,
 		ObjectLockMode:            obj.ObjectLockMode,
 		ObjectLockRetainUntilDate: obj.ObjectLockRetainUntilDate,
-		RequestPayer:              nil,
-		SSECustomerAlgorithm:      obj.SSECustomerAlgorithm,
-		SSECustomerKey:            nil,
-		SSECustomerKeyMD5:         obj.SSECustomerKeyMD5,
-		SSEKMSEncryptionContext:   nil,
-		SSEKMSKeyId:               obj.SSEKMSKeyId,
-		ServerSideEncryption:      obj.ServerSideEncryption,
 		StorageClass:              obj.StorageClass,
-		Tagging:                   nil, // url encode tagging,
 		WebsiteRedirectLocation:   obj.WebsiteRedirectLocation,
+		// ACL:                       nil,
+		// BucketKeyEnabled:          obj.BucketKeyEnabled,
+		// ExpectedBucketOwner:       version.Owner.ID,
+		// GrantFullControl:          nil,
+		// GrantRead:                 nil,
+		// GrantReadACP:              nil,
+		// GrantWriteACP:             nil,
+		// RequestPayer:              nil,
+		// SSECustomerAlgorithm:      obj.SSECustomerAlgorithm,
+		// SSECustomerKey:            nil,
+		// SSECustomerKeyMD5:         obj.SSECustomerKeyMD5,
+		// SSEKMSEncryptionContext:   nil,
+		// SSEKMSKeyId:               obj.SSEKMSKeyId,
+		// ServerSideEncryption:      obj.ServerSideEncryption,
+		// Tagging:                 nil, // url encode tagging,
 	}
 
 	_ = upload
